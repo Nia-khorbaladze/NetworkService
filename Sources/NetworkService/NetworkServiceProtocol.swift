@@ -8,6 +8,11 @@
 import Foundation
 
 public protocol NetworkServiceProtocol {
-    func getData<T: Decodable>(urlString: String, key: String, completion: @Sendable @escaping (Result<T, Error>) -> Void)
-    func getImageData(from url: URL, completion: @Sendable @escaping (Data?, URLResponse?, Error?) -> Void)
+    func request<T: Decodable>(
+        urlString: String,
+        method: HTTPMethod,
+        headers: [String: String]?,
+        body: Data?,
+        decoder: JSONDecoder
+    ) async throws -> T
 }
